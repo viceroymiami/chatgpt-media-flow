@@ -1,6 +1,8 @@
-# AI Flow Editor
+# AI image & video workflows editor built inside of ChatGPT artifact
 
-A visual node-based editor for creating AI workflows with ReactFlow and Subscribe.dev integration.
+A visual node-based editor for creating AI workflows with ReactFlow, Replicate, and Subscribe.dev integration. Users can create workflows by talking to ChatGPT.
+
+On the roadmap: supporting a lot more AI models and API providers
 
 ## Quick Start
 
