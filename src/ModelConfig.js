@@ -46,8 +46,8 @@ export const MODELS_CONFIG = {
     params: ['aspectRatio'],
     aspectRatios: ['16:9', '9:16']
   },
-  'bytedance/seedance-1-lite': { 
-    name: 'Seedance Lite', 
+  'bytedance/seedance-1-lite': {
+    name: 'Seedance Lite',
     description: 'Video generation with start and end frame',
     inputs: [
       { id: 'prompt', name: 'prompt', type: 'prompt', required: true },
@@ -59,11 +59,12 @@ export const MODELS_CONFIG = {
     ],
     color: 'purple',
     category: 'video',
-    params: ['aspectRatio'],
-    aspectRatios: ['1:1', '16:9', '9:16']
+    params: ['aspectRatio', 'duration'],
+    aspectRatios: ['1:1', '16:9', '9:16'],
+    durationOptions: { default: 5, min: 3, max: 12 }
   },
-  'bytedance/seedance-1-pro': { 
-    name: 'Seedance Pro', 
+  'bytedance/seedance-1-pro': {
+    name: 'Seedance Pro',
     description: 'Premium video generation',
     inputs: [
       { id: 'prompt', name: 'prompt', type: 'prompt', required: true },
@@ -74,8 +75,9 @@ export const MODELS_CONFIG = {
     ],
     color: 'purple',
     category: 'video',
-    params: ['aspectRatio'],
-    aspectRatios: ['1:1', '16:9', '9:16']
+    params: ['aspectRatio', 'duration'],
+    aspectRatios: ['1:1', '16:9', '9:16'],
+    durationOptions: { default: 5, min: 3, max: 12 }
   },
   'openai/gpt-4o': {
     name: 'GPT-4o',
@@ -116,7 +118,7 @@ export const MODELS_CONFIG = {
     ],
     color: 'green',
     category: 'voice',
-    params: ['voice_id'],
+    params: ['voice_id', 'speed', 'pitch', 'emotion'],
     voiceOptions: [
       'English_Trustworth_Man',
       'English_Aussie_Bloke',
@@ -157,7 +159,10 @@ export const MODELS_CONFIG = {
       'English_Jovialman',
       'English_WhimsicalGirl',
       'English_Kind-heartedGirl'
-    ]
+    ],
+    speedOptions: { default: 1, min: 0.5, max: 2 },
+    pitchOptions: { default: 0, min: -12, max: 12 },
+    emotionOptions: ['auto', 'neutral', 'happy', 'sad', 'angry', 'fearful', 'disgusted', 'surprised']
   },
   'sync/lipsync-2': {
     name: 'Lipsync-2',
@@ -172,7 +177,7 @@ export const MODELS_CONFIG = {
     color: 'purple',
     category: 'video',
     params: ['sync_mode'],
-    syncModeOptions: ['bounce', 'loop']
+    syncModeOptions: ['loop', 'bounce', 'cut_off', 'silence', 'remap']
   }
 };
 

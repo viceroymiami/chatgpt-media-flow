@@ -456,7 +456,7 @@ export const useFlowLogic = () => {
     if (targetNode.type === 'model') {
       // For model nodes, the target handle type should match the handle ID
       if (targetHandle === 'prompt') targetType = 'prompt';
-      else if (targetHandle === 'image' || targetHandle === 'input_image' || targetHandle === 'image_1' || targetHandle === 'image_2') {
+      else if (targetHandle === 'image' || targetHandle === 'input_image' || targetHandle === 'image_1' || targetHandle === 'image_2' || targetHandle === 'last_frame_image') {
         targetType = 'image';
       }
       else targetType = targetHandle; // fallback to handle ID
@@ -580,6 +580,10 @@ export const useFlowLogic = () => {
       onSizeChange: updateSize,
       onAspectRatioChange: updateAspectRatio,
       onVoiceIdChange: updateVoiceId,
+      onDurationChange: updateDuration,
+      onSpeedChange: updateSpeed,
+      onPitchChange: updatePitch,
+      onEmotionChange: updateEmotion,
       onSyncModeChange: updateSyncMode,
       onSystemPromptChange: updateSystemPrompt,
       onLabelChange: updateLabel,
@@ -628,6 +632,10 @@ export const useFlowLogic = () => {
       onSizeChange: updateSize,
       onAspectRatioChange: updateAspectRatio,
       onVoiceIdChange: updateVoiceId,
+      onDurationChange: updateDuration,
+      onSpeedChange: updateSpeed,
+      onPitchChange: updatePitch,
+      onEmotionChange: updateEmotion,
       onSyncModeChange: updateSyncMode,
       onSystemPromptChange: updateSystemPrompt,
       onStrengthChange: updateStrength,
@@ -742,6 +750,42 @@ export const useFlowLogic = () => {
     setNodes((nds) =>
       nds.map((node) =>
         node.id === nodeId ? { ...node, data: { ...node.data, voice_id } } : node
+      )
+    );
+  };
+
+  const updateDuration = (nodeId, duration) => {
+    console.log(`⏱️ Duration changed for node ${nodeId}: ${duration} seconds`);
+    setNodes((nds) =>
+      nds.map((node) =>
+        node.id === nodeId ? { ...node, data: { ...node.data, duration } } : node
+      )
+    );
+  };
+
+  const updateSpeed = (nodeId, speed) => {
+    console.log(`🏃 Speed changed for node ${nodeId}: ${speed}x`);
+    setNodes((nds) =>
+      nds.map((node) =>
+        node.id === nodeId ? { ...node, data: { ...node.data, speed } } : node
+      )
+    );
+  };
+
+  const updatePitch = (nodeId, pitch) => {
+    console.log(`🎵 Pitch changed for node ${nodeId}: ${pitch} semitones`);
+    setNodes((nds) =>
+      nds.map((node) =>
+        node.id === nodeId ? { ...node, data: { ...node.data, pitch } } : node
+      )
+    );
+  };
+
+  const updateEmotion = (nodeId, emotion) => {
+    console.log(`😊 Emotion changed for node ${nodeId}: ${emotion}`);
+    setNodes((nds) =>
+      nds.map((node) =>
+        node.id === nodeId ? { ...node, data: { ...node.data, emotion } } : node
       )
     );
   };
@@ -1075,8 +1119,8 @@ export const useFlowLogic = () => {
               if (inputAudio) {
                 input.audio = inputAudio;
               }
-              // Add sync_mode parameter with 'bounce' as default
-              input.sync_mode = node.data.sync_mode || 'bounce';
+              // Add sync_mode parameter with 'loop' as default
+              input.sync_mode = node.data.sync_mode || 'loop';
             } else if (isVideoModel) {
               input = { prompt };
               input.aspect_ratio = node.data.aspectRatio;
@@ -1087,6 +1131,10 @@ export const useFlowLogic = () => {
               if (lastFrameImage) {
                 // Some video models support last_frame_image parameter
                 input.last_frame_image = lastFrameImage;
+              }
+              // Add duration parameter for video models that support it
+              if (node.data.duration) {
+                input.duration = node.data.duration;
               }
             } else if (isLanguageModel) {
               // Language models use messages format
@@ -1120,11 +1168,26 @@ export const useFlowLogic = () => {
             } else if (isVoiceModel) {
               // Voice models expect text input for TTS
               input = { text: prompt };
-              
+
               // Add voice_id parameter - use specified voice or fallback to default
               const voiceId = node.data.voice_id || (modelConfig?.voiceOptions && modelConfig.voiceOptions[0]);
               if (voiceId) {
                 input.voice_id = voiceId;
+              }
+
+              // Add speed parameter
+              if (node.data.speed !== undefined) {
+                input.speed = node.data.speed;
+              }
+
+              // Add pitch parameter
+              if (node.data.pitch !== undefined) {
+                input.pitch = node.data.pitch;
+              }
+
+              // Add emotion parameter
+              if (node.data.emotion) {
+                input.emotion = node.data.emotion;
               }
             } else {
               // Image model
@@ -1493,6 +1556,12 @@ export const useFlowLogic = () => {
             onModelChange: updateModel,
             onSizeChange: updateSize,
             onAspectRatioChange: updateAspectRatio,
+            onVoiceIdChange: updateVoiceId,
+            onDurationChange: updateDuration,
+            onSpeedChange: updateSpeed,
+            onPitchChange: updatePitch,
+            onEmotionChange: updateEmotion,
+            onSyncModeChange: updateSyncMode,
             onSystemPromptChange: updateSystemPrompt,
             onLabelChange: updateLabel,
             onDescriptionChange: updateDescription,
@@ -1602,6 +1671,10 @@ export const useFlowLogic = () => {
           onSizeChange: updateSize,
           onAspectRatioChange: updateAspectRatio,
           onVoiceIdChange: updateVoiceId,
+          onDurationChange: updateDuration,
+          onSpeedChange: updateSpeed,
+          onPitchChange: updatePitch,
+          onEmotionChange: updateEmotion,
           onSyncModeChange: updateSyncMode,
           onSystemPromptChange: updateSystemPrompt,
           onLabelChange: updateLabel,
@@ -1672,6 +1745,10 @@ export const useFlowLogic = () => {
             onSizeChange: updateSize,
             onAspectRatioChange: updateAspectRatio,
             onVoiceIdChange: updateVoiceId,
+            onDurationChange: updateDuration,
+            onSpeedChange: updateSpeed,
+            onPitchChange: updatePitch,
+            onEmotionChange: updateEmotion,
             onSyncModeChange: updateSyncMode,
             onSystemPromptChange: updateSystemPrompt,
             onLabelChange: updateLabel,
@@ -1915,6 +1992,10 @@ export const useFlowLogic = () => {
     updateSize,
     updateAspectRatio,
     updateVoiceId,
+    updateDuration,
+    updateSpeed,
+    updatePitch,
+    updateEmotion,
     updateSyncMode,
     updateSystemPrompt,
     updateLabel,
