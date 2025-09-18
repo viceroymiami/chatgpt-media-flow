@@ -89,7 +89,7 @@ Canvas content (must match exactly; only window.FLOW may be changed):
           data: {
             model: 'black-forest-labs/flux-schnell',
             aspectRatio: '1:1',
-            outputCount: 2,
+            outputCount: 1,
             label: 'Model',
             name: 'Landscape Generator'
           }

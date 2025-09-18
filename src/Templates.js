@@ -78,7 +78,7 @@ export const FLOW_TEMPLATES = {
               status: "complete"
             },
             width: 320,
-            height: 172,
+            height: 229,
             selected: false
           },
           {
@@ -112,7 +112,7 @@ export const FLOW_TEMPLATES = {
               prompt: "A pixel art of a bowl of ramen."
             },
             width: 320,
-            height: 172,
+            height: 149,
             selected: false
           },
           {
@@ -137,8 +137,8 @@ export const FLOW_TEMPLATES = {
             id: "l21nia",
             type: "model",
             position: {
-              x: 1199.6666475835764,
-              y: 400.95171571496104
+              x: 1057.959356201619,
+              y: 525.6940496779516
             },
             data: {
               label: "Model",
@@ -155,15 +155,53 @@ export const FLOW_TEMPLATES = {
             id: "wxqiq1",
             type: "textInput",
             position: {
-              x: 556.8263571295508,
-              y: -14.887301996362506
+              x: 1055.7956929815136,
+              y: 268.52728076755216
             },
             data: {
               label: "Prompt Text",
               prompt: "A japanese salaryman eating from a pixel art bowl of ramen. He is leaning over, chopsticks in hand, happily slurping up some ramen. Make sure to redraw the ramen and the salaryman so that they are properly integrated together."
             },
             width: 320,
-            height: 172,
+            height: 229,
+            selected: false
+          },
+          {
+            id: "zoq7yg",
+            type: "organizationBox",
+            position: {
+              x: 530.2370200284822,
+              y: 75.69979714629744
+            },
+            data: {
+              label: "Initial images generator",
+              description: ""
+            },
+            style: {
+              width: 382,
+              height: 1057
+            },
+            width: 382,
+            height: 1057,
+            selected: false
+          },
+          {
+            id: "5m8jpi",
+            type: "organizationBox",
+            position: {
+              x: 1027.5367959931584,
+              y: 158.51903522580358
+            },
+            data: {
+              label: "Final composition",
+              description: ""
+            },
+            style: {
+              width: 380,
+              height: 818
+            },
+            width: 380,
+            height: 818,
             selected: false
           }
         ],
@@ -210,7 +248,8 @@ export const FLOW_TEMPLATES = {
             sourceHandle: "image",
             target: "l21nia",
             targetHandle: "image_1",
-            id: "reactflow__edge-2image-l21niaimage_1"
+            id: "reactflow__edge-2image-l21niaimage_1",
+            selected: false
           },
           {
             type: "custom",
@@ -225,7 +264,8 @@ export const FLOW_TEMPLATES = {
             sourceHandle: "image",
             target: "l21nia",
             targetHandle: "image_2",
-            id: "reactflow__edge-9i899timage-l21niaimage_2"
+            id: "reactflow__edge-9i899timage-l21niaimage_2",
+            selected: false
           },
           {
             type: "custom",
@@ -240,7 +280,8 @@ export const FLOW_TEMPLATES = {
             sourceHandle: "prompt",
             target: "l21nia",
             targetHandle: "prompt",
-            id: "reactflow__edge-wxqiq1prompt-l21niaprompt"
+            id: "reactflow__edge-wxqiq1prompt-l21niaprompt",
+            selected: false
           }
         ]
       }
@@ -376,7 +417,7 @@ export const FLOW_TEMPLATES = {
     "Character Generator": {
       description: "Generate fantasy TTRPG characters with weapons using AI models",
       flow: {
-        boardName: "Character Generator",
+        name: "Character Generator",
         nodes: [
           {
             id: "b6wgg9",
@@ -408,15 +449,15 @@ export const FLOW_TEMPLATES = {
               outputCount: 1
             },
             width: 320,
-            height: 287,
+            height: 412,
             selected: false
           },
           {
             id: "ozlxl5",
             type: "model",
             position: {
-              x: 672.0621798811268,
-              y: 431.5763085854969
+              x: 673.0981361789159,
+              y: 419.1448330120277
             },
             data: {
               label: "Weapon Generator",
@@ -433,12 +474,12 @@ export const FLOW_TEMPLATES = {
             id: "9hma0a",
             type: "textInput",
             position: {
-              x: -111.67860805268192,
-              y: 911.1265575237423
+              x: -114.78647694604925,
+              y: 934.9535523728917
             },
             data: {
               label: "Character Prompt",
-              prompt: "Generate an image prompt that will create a picture of a fantasy TTRPG character. Return only the raw prompt, and no other text. The character should be on a white background. The character should hold no items in its hands on on its person, and should be alone (with no other characters, entities, animals...)."
+              prompt: "Generate an image prompt that will create a picture of a fantasy TTRPG character. Return only the raw prompt, and no other text. The character should be on a white background. Specify that the character should hold no items in its hands or on on its person, and should be alone (with no other characters, entities, animals...)."
             },
             width: 320,
             height: 170,
@@ -448,8 +489,8 @@ export const FLOW_TEMPLATES = {
             id: "e4v7e5",
             type: "model",
             position: {
-              x: 275.4556124842153,
-              y: 907.3396126732307
+              x: 279.59943767537175,
+              y: 930.1306512245909
             },
             data: {
               label: "GPT-4o",
@@ -459,15 +500,15 @@ export const FLOW_TEMPLATES = {
               outputCount: 1
             },
             width: 320,
-            height: 287,
+            height: 412,
             selected: false
           },
           {
             id: "blea5b",
             type: "model",
             position: {
-              x: 670.4374364111688,
-              y: 902.5240234784522
+              x: 672.5093490067471,
+              y: 928.4229309231798
             },
             data: {
               label: "Character Generator",
@@ -511,6 +552,64 @@ export const FLOW_TEMPLATES = {
             },
             width: 320,
             height: 412,
+            selected: false
+          },
+          {
+            id: "ki5lq6",
+            type: "organizationBox",
+            position: {
+              x: -131.0035887022715,
+              y: 340.52395932401964
+            },
+            data: {
+              label: "Weapon Generation",
+              description: "GPT-4o comes up with an image prompt for Nano-Banana."
+            },
+            style: {
+              width: 1160,
+              height: 499
+            },
+            width: 1160,
+            height: 499,
+            selected: false
+          },
+          {
+            id: "xhs20t",
+            type: "organizationBox",
+            position: {
+              x: -131.0434515576719,
+              y: 852.865652715009
+            },
+            data: {
+              label: "Character Generation",
+              description: "GPT-4o comes up with an image prompt for Nano-Banana."
+            },
+            style: {
+              width: 1161,
+              height: 492
+            },
+            width: 1161,
+            height: 492,
+            selected: false
+          },
+          {
+            id: "d89ff2",
+            type: "organizationBox",
+            position: {
+              x: 1078.477093574501,
+              y: 460.30354410618577
+            },
+            data: {
+              label: "Final Composition",
+              description: "",
+              backgroundColor: "#374151"
+            },
+            style: {
+              width: 413,
+              height: 739
+            },
+            width: 413,
+            height: 739,
             selected: false
           }
         ],
@@ -629,102 +728,150 @@ export const FLOW_TEMPLATES = {
     "Interior Redesign": {
       description: "Transform room interiors with different styles using AI-powered image processing",
       flow: {
-        boardName: "Interior Redesign",
+        name: "Interior Redesign",
         nodes: [
           {
             id: "ut3nmt",
             type: "imageInput",
             position: {
-              x: 283.6508718844168,
-              y: 257.9337661804626
+              x: 287.1952932155933,
+              y: 282.74471549869844
             },
             data: {
-              label: "Upload Room Image",
-              name: "Start here: Upload picture of room"
+              label: "Upload Image",
+              uploadedImage: null,
+              name: "Start here: Upload picture of room",
+              status: "complete"
             },
             width: 320,
-            height: 172,
+            height: 222,
             selected: false
           },
           {
-            id: "wn7gf6",
+            id: "aepzzi",
             type: "textInput",
             position: {
-              x: 279.2928509418212,
-              y: 495.1667914387896
+              x: 289.0739227882707,
+              y: 559.7522349966075
             },
             data: {
-              label: "Style 1 Prompt",
-              prompt: "Transform this interior into a modern minimalist space with clean lines, neutral colors, and sleek furniture. Keep the room's basic structure but update all furnishings and decor to reflect contemporary design principles.",
-              name: "Style 1"
+              label: "Prompt Text",
+              prompt: "Modern Minimalism",
+              name: "Style 1",
+              status: "complete"
             },
             width: 320,
-            height: 170,
+            height: 149,
             selected: false
           },
           {
-            id: "f0tkeg",
+            id: "jdtf6t",
             type: "textInput",
             position: {
-              x: 277.6684075717791,
-              y: 730.1145063893012
+              x: 288.7786023385698,
+              y: 771.4666295698717
             },
             data: {
-              label: "Style 2 Prompt",
-              prompt: "Redesign this room in a cozy rustic farmhouse style with warm wood tones, vintage furniture, and natural textures. Maintain the room layout while adding character through rustic elements.",
-              name: "Style 2"
+              label: "Prompt Text",
+              prompt: "Mid-century Modern",
+              name: "Style 2",
+              status: "complete"
             },
             width: 320,
-            height: 170,
+            height: 149,
             selected: false
           },
           {
             id: "ub6qf2",
             type: "textInput",
             position: {
-              x: 276.04396420173885,
-              y: 965.062221339813
+              x: 289.89816887591024,
+              y: 988.966661211843
             },
             data: {
-              label: "Style 3 Prompt",
-              prompt: "Transform this space into an elegant traditional room with rich colors, classic furniture, and sophisticated decor. Keep the architectural elements while upgrading to timeless, luxurious styling.",
-              name: "Style 3"
+              label: "Prompt Text",
+              prompt: "Medieval",
+              name: "Style 3",
+              status: "complete"
             },
             width: 320,
-            height: 170,
+            height: 149,
             selected: false
           },
           {
-            id: "k8u7wp",
+            id: "ximqa0",
             type: "model",
             position: {
-              x: 736.4779874858598,
-              y: 478.77053792855715
+              x: 713.1595113296663,
+              y: 123.88405002415129
             },
             data: {
-              label: "Style 1 Generator",
-              model: "google/nano-banana",
-              name: "Nano Banana",
+              label: "Model",
+              model: "openai/gpt-4o",
+              name: "GPT-4o",
               aspectRatio: "1:1",
-              outputCount: 1
+              outputCount: 1,
+              systemPrompt: "Task: Generate image prompt that will be used to transform the reference image into the provided style.\nThe prompt should refer to the reference image as \"reference image\".\nName some features from the reference image, and the way that they should be revised. State that the room proportions and perspective should not change.\nImportant: Only return the raw prompt and no other text.",
+              status: "complete"
             },
             width: 320,
             height: 412,
             selected: false
           },
           {
-            id: "tnqgxg",
+            id: "g51wpc",
             type: "model",
             position: {
-              x: 734.853544115818,
-              y: 713.7182528790688
+              x: 716.671970189814,
+              y: 1015.4605068229052
             },
             data: {
-              label: "Style 2 Generator",
+              label: "Model",
+              model: "openai/gpt-4o",
+              name: "GPT-4o",
+              aspectRatio: "1:1",
+              outputCount: 1,
+              systemPrompt: "Task: Generate image prompt that will be used to transform the reference image into the provided style.\nThe prompt should refer to the reference image as \"reference image\".\nName some features from the reference image, and the way that they should be revised. State that the room proportions and perspective should not change.\nImportant: Only return the raw prompt and no other text.",
+              status: "complete"
+            },
+            width: 320,
+            height: 412,
+            selected: false
+          },
+          {
+            id: "93o0h8",
+            type: "model",
+            position: {
+              x: 717.6172424086755,
+              y: 566.4930877180835
+            },
+            data: {
+              label: "Model",
+              model: "openai/gpt-4o",
+              name: "GPT-4o",
+              aspectRatio: "1:1",
+              outputCount: 1,
+              systemPrompt: "Task: Generate image prompt that will be used to transform the reference image into the provided style.\nThe prompt should refer to the reference image as \"reference image\".\nName some features from the reference image, and the way that they should be revised. State that the room proportions and perspective should not change.\nImportant: Only return the raw prompt and no other text.",
+              status: "complete"
+            },
+            width: 320,
+            height: 412,
+            selected: false
+          },
+          {
+            id: "k8u7wp",
+            type: "model",
+            position: {
+              x: 1127.553475360898,
+              y: 120.3824754999298
+            },
+            data: {
+              label: "Model",
               model: "google/nano-banana",
               name: "Nano Banana",
               aspectRatio: "1:1",
-              outputCount: 1
+              outputCount: 1,
+              status: "complete"
             },
             width: 320,
             height: 412,
@@ -734,18 +881,95 @@ export const FLOW_TEMPLATES = {
             id: "875ghx",
             type: "model",
             position: {
-              x: 733.2291007457758,
-              y: 948.6659678295805
+              x: 1131.632107355748,
+              y: 1017.6702338951422
             },
             data: {
-              label: "Style 3 Generator",
+              label: "Model",
               model: "google/nano-banana",
               name: "Nano Banana",
               aspectRatio: "1:1",
-              outputCount: 1
+              outputCount: 1,
+              status: "complete"
             },
             width: 320,
             height: 412,
+            selected: false
+          },
+          {
+            id: "tnqgxg",
+            type: "model",
+            position: {
+              x: 1128.749964124049,
+              y: 564.7583486879344
+            },
+            data: {
+              label: "Model",
+              model: "google/nano-banana",
+              name: "Nano Banana",
+              aspectRatio: "1:1",
+              outputCount: 1,
+              status: "complete"
+            },
+            width: 320,
+            height: 412,
+            selected: false
+          },
+          {
+            id: "1ffxn2",
+            type: "organizationBox",
+            position: {
+              x: 689.1281694098658,
+              y: 6.552278844960483
+            },
+            data: {
+              label: "Makeover prompt generator",
+              description: ""
+            },
+            style: {
+              width: 371,
+              height: 1451
+            },
+            width: 371,
+            height: 1451,
+            selected: false
+          },
+          {
+            id: "inotbm",
+            type: "organizationBox",
+            position: {
+              x: 262.579666282258,
+              y: 178.51552626589012
+            },
+            data: {
+              label: "Start here",
+              description: "Upload room image and set styles"
+            },
+            style: {
+              width: 380,
+              height: 985
+            },
+            width: 380,
+            height: 985,
+            selected: false
+          },
+          {
+            id: "ixadld",
+            type: "organizationBox",
+            position: {
+              x: 1102.0402402533093,
+              y: 6.391376229290927
+            },
+            data: {
+              label: "Final redesign images",
+              description: ""
+            },
+            style: {
+              width: 377,
+              height: 1448
+            },
+            width: 377,
+            height: 1448,
             selected: false
           }
         ],
@@ -759,11 +983,12 @@ export const FLOW_TEMPLATES = {
             animated: false,
             deletable: true,
             data: {},
-            source: "wn7gf6",
-            sourceHandle: "prompt",
+            source: "ximqa0",
+            sourceHandle: "text",
             target: "k8u7wp",
             targetHandle: "prompt",
-            id: "reactflow__edge-wn7gf6prompt-k8u7wpprompt"
+            id: "reactflow__edge-ximqa0text-k8u7wpprompt",
+            selected: false
           },
           {
             type: "custom",
@@ -774,11 +999,60 @@ export const FLOW_TEMPLATES = {
             animated: false,
             deletable: true,
             data: {},
-            source: "f0tkeg",
-            sourceHandle: "prompt",
+            source: "93o0h8",
+            sourceHandle: "text",
             target: "tnqgxg",
             targetHandle: "prompt",
-            id: "reactflow__edge-f0tkegprompt-tnqgxgprompt"
+            id: "reactflow__edge-93o0h8text-tnqgxgprompt",
+            selected: false
+          },
+          {
+            type: "custom",
+            style: {
+              stroke: "#4b5563",
+              strokeWidth: 2
+            },
+            animated: false,
+            deletable: true,
+            data: {},
+            source: "g51wpc",
+            sourceHandle: "text",
+            target: "875ghx",
+            targetHandle: "prompt",
+            id: "reactflow__edge-g51wpctext-875ghxprompt",
+            selected: false
+          },
+          {
+            type: "custom",
+            style: {
+              stroke: "#4b5563",
+              strokeWidth: 2
+            },
+            animated: false,
+            deletable: true,
+            data: {},
+            source: "aepzzi",
+            sourceHandle: "prompt",
+            target: "ximqa0",
+            targetHandle: "prompt",
+            id: "reactflow__edge-aepzziprompt-ximqa0prompt",
+            selected: false
+          },
+          {
+            type: "custom",
+            style: {
+              stroke: "#4b5563",
+              strokeWidth: 2
+            },
+            animated: false,
+            deletable: true,
+            data: {},
+            source: "jdtf6t",
+            sourceHandle: "prompt",
+            target: "93o0h8",
+            targetHandle: "prompt",
+            id: "reactflow__edge-jdtf6tprompt-93o0h8prompt",
+            selected: false
           },
           {
             type: "custom",
@@ -791,9 +1065,26 @@ export const FLOW_TEMPLATES = {
             data: {},
             source: "ub6qf2",
             sourceHandle: "prompt",
-            target: "875ghx",
+            target: "g51wpc",
             targetHandle: "prompt",
-            id: "reactflow__edge-ub6qf2prompt-875ghxprompt"
+            id: "reactflow__edge-ub6qf2prompt-g51wpcprompt",
+            selected: false
+          },
+          {
+            type: "custom",
+            style: {
+              stroke: "#4b5563",
+              strokeWidth: 2
+            },
+            animated: false,
+            deletable: true,
+            data: {},
+            source: "ut3nmt",
+            sourceHandle: "image",
+            target: "ximqa0",
+            targetHandle: "image",
+            id: "reactflow__edge-ut3nmtimage-ximqa0image",
+            selected: false
           },
           {
             type: "custom",

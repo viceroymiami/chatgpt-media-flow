@@ -717,11 +717,12 @@ export const TextInputNode = ({ data, id, selected }) => {
   const [tempName, setTempName] = useState('');
   const textareaRef = useRef(null);
 
-  // Auto-resize textarea when data.prompt changes (e.g., when importing templates)
+  // Auto-resize textarea when data.prompt changes
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = Math.max(60, textareaRef.current.scrollHeight) + 'px';
+      const textarea = textareaRef.current;
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.max(60, textarea.scrollHeight) + 'px';
     }
   }, [data.prompt]);
 
@@ -789,21 +790,11 @@ export const TextInputNode = ({ data, id, selected }) => {
             value={data.prompt || ''}
             onChange={(e) => {
               data.onPromptChange?.(id, e.target.value);
-              // Auto-resize textarea
-              const textarea = e.target;
-              textarea.style.height = 'auto';
-              textarea.style.height = Math.max(60, textarea.scrollHeight) + 'px';
             }}
             placeholder="Enter your prompt..."
             className="nodrag w-full bg-gray-800 text-gray-100 text-sm p-3 rounded-2xl border border-gray-700 focus:border-green-500 focus:outline-none resize-none overflow-hidden"
             style={{ 
-              minHeight: '60px',
-              height: data.prompt ? Math.max(60, (data.prompt.split('\n').length + 1) * 20) + 'px' : '60px'
-            }}
-            onInput={(e) => {
-              // Auto-resize on input as well
-              e.target.style.height = 'auto';
-              e.target.style.height = Math.max(60, e.target.scrollHeight) + 'px';
+              minHeight: '60px'
             }}
           />
         </div>
@@ -1214,6 +1205,27 @@ export const ModelNode = ({ data, id, selected }) => {
                 </div>
               )}
 
+              {/* Duration */}
+              {currentModel.params && currentModel.params.includes('duration') && (
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1">Duration (seconds)</label>
+                  <input
+                    type="number"
+                    min={currentModel.durationOptions?.min || 3}
+                    max={currentModel.durationOptions?.max || 12}
+                    value={data.duration || currentModel.durationOptions?.default || 5}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value);
+                      data.onDurationChange?.(id, value);
+                    }}
+                    className="nodrag w-full bg-gray-900 text-gray-100 text-sm p-2 rounded-2xl border border-gray-700 focus:border-blue-500 focus:outline-none"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">
+                    Range: {currentModel.durationOptions?.min || 3}-{currentModel.durationOptions?.max || 12} seconds
+                  </div>
+                </div>
+              )}
+
               {/* Sync Mode */}
               {currentModel.params && currentModel.params.includes('sync_mode') && (
                 <div>
@@ -1234,6 +1246,72 @@ export const ModelNode = ({ data, id, selected }) => {
                   </select>
                   <div className="text-xs text-gray-500 mt-1">
                     Current: {data.sync_mode || 'bounce'} | Options: {(currentModel.syncModeOptions || []).length}
+                  </div>
+                </div>
+              )}
+
+              {/* Speed */}
+              {currentModel.params && currentModel.params.includes('speed') && (
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1">Speed</label>
+                  <input
+                    type="number"
+                    step="0.1"
+                    min={currentModel.speedOptions?.min || 0.5}
+                    max={currentModel.speedOptions?.max || 2}
+                    value={data.speed || currentModel.speedOptions?.default || 1}
+                    onChange={(e) => {
+                      const value = parseFloat(e.target.value);
+                      data.onSpeedChange?.(id, value);
+                    }}
+                    className="nodrag w-full bg-gray-900 text-gray-100 text-sm p-2 rounded-2xl border border-gray-700 focus:border-blue-500 focus:outline-none"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">
+                    Range: {currentModel.speedOptions?.min || 0.5}-{currentModel.speedOptions?.max || 2}x
+                  </div>
+                </div>
+              )}
+
+              {/* Pitch */}
+              {currentModel.params && currentModel.params.includes('pitch') && (
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1">Pitch</label>
+                  <input
+                    type="number"
+                    min={currentModel.pitchOptions?.min || -12}
+                    max={currentModel.pitchOptions?.max || 12}
+                    value={data.pitch || currentModel.pitchOptions?.default || 0}
+                    onChange={(e) => {
+                      const value = parseInt(e.target.value);
+                      data.onPitchChange?.(id, value);
+                    }}
+                    className="nodrag w-full bg-gray-900 text-gray-100 text-sm p-2 rounded-2xl border border-gray-700 focus:border-blue-500 focus:outline-none"
+                  />
+                  <div className="text-xs text-gray-500 mt-1">
+                    Range: {currentModel.pitchOptions?.min || -12} to {currentModel.pitchOptions?.max || 12} semitones
+                  </div>
+                </div>
+              )}
+
+              {/* Emotion */}
+              {currentModel.params && currentModel.params.includes('emotion') && (
+                <div>
+                  <label className="block text-xs text-gray-400 mb-1">Emotion</label>
+                  <select
+                    value={data.emotion || (currentModel.emotionOptions || [])[0]}
+                    onChange={(e) => {
+                      data.onEmotionChange?.(id, e.target.value);
+                    }}
+                    className="nodrag w-full bg-gray-900 text-gray-100 text-sm p-2 rounded-2xl border border-gray-700 focus:border-blue-500 focus:outline-none"
+                  >
+                    {(currentModel.emotionOptions || []).map(emotion => (
+                      <option key={emotion} value={emotion}>
+                        {emotion.charAt(0).toUpperCase() + emotion.slice(1)}
+                      </option>
+                    ))}
+                  </select>
+                  <div className="text-xs text-gray-500 mt-1">
+                    Current: {data.emotion || 'auto'} | Options: {(currentModel.emotionOptions || []).length}
                   </div>
                 </div>
               )}
@@ -1764,11 +1842,12 @@ export const OrganizationBoxNode = ({ data, id, selected, style }) => {
     });
   }, [style, data, selected, id]);
 
-  // Auto-resize textarea when data.description changes (e.g., when importing templates)
+  // Auto-resize textarea when data.description changes
   useEffect(() => {
     if (textareaRef.current) {
-      textareaRef.current.style.height = 'auto';
-      textareaRef.current.style.height = Math.max(60, textareaRef.current.scrollHeight) + 'px';
+      const textarea = textareaRef.current;
+      textarea.style.height = 'auto';
+      textarea.style.height = Math.max(32, textarea.scrollHeight) + 'px';
     }
   }, [data.description]);
 
@@ -1859,21 +1938,11 @@ export const OrganizationBoxNode = ({ data, id, selected, style }) => {
             value={data.description || ''}
             onChange={(e) => {
               data.onDescriptionChange?.(id, e.target.value);
-              // Auto-resize textarea
-              const textarea = e.target;
-              textarea.style.height = 'auto';
-              textarea.style.height = Math.max(32, textarea.scrollHeight) + 'px';
             }}
             placeholder={selected ? "Add description..." : ""}
             className="nodrag w-full bg-transparent text-gray-300 text-xs resize-none border border-gray-600 border-opacity-30 rounded-lg p-2 focus:outline-none focus:border-opacity-60 placeholder-gray-500 overflow-hidden"
             style={{ 
-              minHeight: '32px',
-              height: data.description ? Math.max(32, (data.description.split('\n').length + 1) * 16) + 'px' : '32px'
-            }}
-            onInput={(e) => {
-              // Auto-resize on input as well
-              e.target.style.height = 'auto';
-              e.target.style.height = Math.max(32, e.target.scrollHeight) + 'px';
+              minHeight: '32px'
             }}
             onMouseDown={(e) => e.stopPropagation()}
             onMouseMove={(e) => e.stopPropagation()}
@@ -2780,6 +2849,7 @@ export const ContextMenu = ({ x, y, flowPosition, onClose, addNodeFromMenu, addM
   const [showImageModels, setShowImageModels] = useState(false);
   const [showVideoModels, setShowVideoModels] = useState(false);
   const [showLanguageModels, setShowLanguageModels] = useState(false);
+  const [showVoiceModels, setShowVoiceModels] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -2866,27 +2936,16 @@ export const ContextMenu = ({ x, y, flowPosition, onClose, addNodeFromMenu, addM
         </button>
         {showImageModels && (
           <div className="absolute left-full top-0 bg-gray-800 border border-gray-600 rounded-lg shadow-xl py-2 min-w-64 z-[10000]">
-            <button
-              onClick={() => handleAddNode('model', 'black-forest-labs/flux-schnell', 'Flux Schnell')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['black-forest-labs/flux-schnell'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['black-forest-labs/flux-schnell'].description}</div>
-            </button>
-            <button
-              onClick={() => handleAddNode('model', 'black-forest-labs/flux-kontext-max', 'Flux Kontext')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['black-forest-labs/flux-kontext-max'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['black-forest-labs/flux-kontext-max'].description}</div>
-            </button>
-            <button
-              onClick={() => handleAddNode('model', 'google/nano-banana', 'Nano Banana')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['google/nano-banana'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['google/nano-banana'].description}</div>
-            </button>
+            {Object.entries(getImageModels()).map(([modelId, config]) => (
+              <button
+                key={modelId}
+                onClick={() => handleAddNode('model', modelId, config.name)}
+                className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
+              >
+                <div className="font-medium">{config.name}</div>
+                <div className="text-xs text-gray-400">{config.description}</div>
+              </button>
+            ))}
           </div>
         )}
       </div>
@@ -2906,27 +2965,16 @@ export const ContextMenu = ({ x, y, flowPosition, onClose, addNodeFromMenu, addM
         </button>
         {showVideoModels && (
           <div className="absolute left-full top-0 bg-gray-800 border border-gray-600 rounded-lg shadow-xl py-2 min-w-64 z-[10000]">
-            <button
-              onClick={() => handleAddNode('model', 'wan-video/wan-2.2-5b-fast', 'WAN Video')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['wan-video/wan-2.2-5b-fast'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['wan-video/wan-2.2-5b-fast'].description}</div>
-            </button>
-            <button
-              onClick={() => handleAddNode('model', 'bytedance/seedance-1-lite', 'Seedance Lite')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['bytedance/seedance-1-lite'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['bytedance/seedance-1-lite'].description}</div>
-            </button>
-            <button
-              onClick={() => handleAddNode('model', 'bytedance/seedance-1-pro', 'Seedance Pro')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['bytedance/seedance-1-pro'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['bytedance/seedance-1-pro'].description}</div>
-            </button>
+            {Object.entries(getVideoModels()).map(([modelId, config]) => (
+              <button
+                key={modelId}
+                onClick={() => handleAddNode('model', modelId, config.name)}
+                className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
+              >
+                <div className="font-medium">{config.name}</div>
+                <div className="text-xs text-gray-400">{config.description}</div>
+              </button>
+            ))}
           </div>
         )}
       </div>
@@ -2946,20 +2994,45 @@ export const ContextMenu = ({ x, y, flowPosition, onClose, addNodeFromMenu, addM
         </button>
         {showLanguageModels && (
           <div className="absolute left-full top-0 bg-gray-800 border border-gray-600 rounded-lg shadow-xl py-2 min-w-64 z-[10000]">
-            <button
-              onClick={() => handleAddNode('model', 'openai/gpt-4o', 'GPT-4o')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['openai/gpt-4o'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['openai/gpt-4o'].description}</div>
-            </button>
-            <button
-              onClick={() => handleAddNode('model', 'openai/gpt-5', 'GPT-5')}
-              className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
-            >
-              <div className="font-medium">{MODELS_CONFIG['openai/gpt-5'].name}</div>
-              <div className="text-xs text-gray-400">{MODELS_CONFIG['openai/gpt-5'].description}</div>
-            </button>
+            {Object.entries(getLanguageModels()).map(([modelId, config]) => (
+              <button
+                key={modelId}
+                onClick={() => handleAddNode('model', modelId, config.name)}
+                className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
+              >
+                <div className="font-medium">{config.name}</div>
+                <div className="text-xs text-gray-400">{config.description}</div>
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
+
+      {/* Voice Models */}
+      <div
+        className="relative"
+        onMouseEnter={() => setShowVoiceModels(true)}
+        onMouseLeave={() => setShowVoiceModels(false)}
+      >
+        <button
+          className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors flex items-center gap-3"
+        >
+          <Microphone size={16} />
+          Voice Models
+          <div className="ml-auto text-gray-500">›</div>
+        </button>
+        {showVoiceModels && (
+          <div className="absolute left-full top-0 bg-gray-800 border border-gray-600 rounded-lg shadow-xl py-2 min-w-64 z-[10000]">
+            {Object.entries(getVoiceModels()).map(([modelId, config]) => (
+              <button
+                key={modelId}
+                onClick={() => handleAddNode('model', modelId, config.name)}
+                className="w-full text-left px-4 py-2 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors text-sm"
+              >
+                <div className="font-medium">{config.name}</div>
+                <div className="text-xs text-gray-400">{config.description}</div>
+              </button>
+            ))}
           </div>
         )}
       </div>
