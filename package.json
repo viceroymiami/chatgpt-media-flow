@@ -1,0 +1,58 @@
+{
+  "name": "@chatgpt-media-flow/editor",
+  "version": "1.0.0",
+  "description": "AI Flow Editor - A visual node-based editor for AI workflows with ReactFlow, Subscribe.dev and Replicate API integration",
+  "main": "flow-editor.umd.js",
+  "umd:main": "flow-editor.umd.js",
+  "module": "flow-editor.umd.js",
+  "types": "flow-editor.d.ts",
+  "files": [
+    "dist/*"
+  ],
+  "scripts": {
+    "build": "webpack",
+    "dev": "webpack --mode development --watch & bunx serve -p 8000",
+    "serve": "bunx serve -p 8000",
+    "dev:serve": "webpack --mode development && bunx serve -p 8000",
+    "test": "echo 'No tests specified'",
+    "prepublishOnly": "NODE_ENV=production npm run build"
+  },
+  "keywords": [
+    "react",
+    "reactflow",
+    "ai",
+    "workflow",
+    "visual-editor",
+    "node-editor",
+    "subscribe-dev",
+    "replicate",
+    "umd"
+  ],
+  "author": "Aaron Yuan",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "reactflow": ">=11.11.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.28.3",
+    "@babel/core": "^7.28.4",
+    "@babel/preset-react": "^7.27.1",
+    "babel-loader": "^10.0.0",
+    "webpack": "^5.101.3",
+    "webpack-cli": "^6.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/viceroymiami/chatgpt-media-flow.git"
+  },
+  "homepage": "https://github.com/viceroymiami/chatgpt-media-flow#readme",
+  "bugs": {
+    "url": "https://github.com/viceroymiami/chatgpt-media-flow/issues"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}

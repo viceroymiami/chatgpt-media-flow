@@ -1,0 +1,9 @@
+import FlowEditor from './FlowEditor';
+
+// Project ID for Subscribe.dev integration
+const projectId = 'pub_ZXlKaGJHY2lPaUpJVXpJMU5pSXNJblI1Y0NJNklrcFhWQ0o5LmV5SndjbTlxWldOMFNXUWlPaUl4TTJNeFpEUXhNeTAwWlRjeUxUUTRNbVV0T1RSa055MWpZMlkwTUdRM05URmtZeklpTENKaGNHbExaWGxKWkNJNkltRmhNek14T0RVeExUUXlPV1V0TkdVd1pDMDVOR1k0TFRoak5XVXlZalpqTUdJek55SXNJbkJ5YjJwbFkzUk9ZVzFsSWpvaVEyaGhkRWRRVkNCSlZpQlhiM0pyWm14dmQzTWlMQ0pwWVhRaU9qRTNOVGd3T0RZMU5UWXNJbVY0Y0NJNk1UYzRPVFkwTkRFMU5uMC5IaE9xYXlNQzUtRmViOGR2YnBYZm94cm5fektQY0duYVpUTy12QmVMWVNj';
+
+// Attach projectId as a property to the default export
+FlowEditor.projectId = projectId;
+
+export default FlowEditor;
